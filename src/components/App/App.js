@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import Header from "../Header/header";
 import {Route, Routes} from "react-router-dom";
 import BookList from "../Books/BooksList/BookList";
+import BooksService from "../../repository/booksRepository";
 
 class App extends Component {
 
@@ -13,17 +14,29 @@ class App extends Component {
     };
   }
 
+
+  componentDidMount() {
+    this.loadBooks();
+  }
+
+  loadBooks = () => {
+    BooksService.fetchBooks()
+      .then((data) => {
+        this.setState({
+          books: data.data
+        });
+      })
+  }
+
   render() {
-
-
     return (
       <div>
         <Header/>
         <main>
           <div className="container">
             <Routes>
-              <Route path="/" element={<BookList/>}/>
-              <Route path="/books" element={<BookList/>}/>
+              <Route path="/" element={<BookList books={this.state.books}/>}/>
+              <Route path="/books" element={<BookList books={this.state.books}/>}/>
             </Routes>
           </div>
         </main>
@@ -33,11 +46,6 @@ class App extends Component {
       </div>
     );
   }
-
-  componentDidMount() {
-    console.log("");
-  }
-
 }
 
 export default App;
