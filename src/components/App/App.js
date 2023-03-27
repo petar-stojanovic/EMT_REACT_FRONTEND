@@ -4,6 +4,7 @@ import Header from "../Header/header";
 import {Route, Routes} from "react-router-dom";
 import BookList from "../Books/BooksList/BookList";
 import BooksService from "../../repository/booksRepository";
+import Categories from "../Categories/Categories";
 
 class App extends Component {
 
@@ -25,6 +26,7 @@ class App extends Component {
         this.setState({
           books: data.data
         });
+        console.log(data.data);
       })
   }
 
@@ -37,6 +39,7 @@ class App extends Component {
             <Routes>
               <Route path="/" element={<BookList books={this.state.books}/>}/>
               <Route path="/books" element={<BookList books={this.state.books}/>}/>
+              <Route path="/categories" element={<Categories books={this.state.books}/>}/>
             </Routes>
           </div>
         </main>
