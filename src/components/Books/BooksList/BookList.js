@@ -34,7 +34,10 @@ class BookList extends React.Component {
               {/*{books}*/}
 
               {this.props.books.map((term, index) => {
-                return <BookTerm key={index} term={term}/>
+                return <BookTerm key={index} term={term}
+                                 onDelete={this.props.onDelete}
+                                 onEdit={this.props.onEdit}
+                                 onBookRent={this.props.onBookRent}/>
               })}
 
               </tbody>

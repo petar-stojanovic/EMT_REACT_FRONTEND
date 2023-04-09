@@ -10,22 +10,25 @@ const BookTerm = (props) => {
       <td>{props.term.category}</td>
       <td>{props.term.availableCopies}</td>
       <td className={""}>
-        <a title={"Delete"} className={"btn btn-danger"} onClick={() => props.onDelete(props.term.id)} href="/">
-          Delete
-        </a>
-        {/*<Link to={"/"} title={"Delete"} className={"btn btn-danger"} onClick={() => props.onDelete(props.term.id)} >*/}
+        {/*<a title={"Delete"} className={"btn btn-danger"} onClick={() => props.onDelete(props.term.id)} href="/books">*/}
         {/*  Delete*/}
-        {/*</Link>*/}
+        {/*</a>*/}
+        <Link to={"/"} title={"Delete"} className={"btn btn-danger"} onClick={() => props.onDelete(props.term.id)}>
+          Delete
+        </Link>
         <Link className={"btn btn-primary mx-2"}
               onClick={() => props.onEdit(props.term.id)}
               to={`/books/edit/${props.term.id}`}>
           Edit
         </Link>
-        <Link className={"btn btn-dark"}
-              onClick={() => props.onEdit(props.term.id)}
-              to={`/books/edit/${props.term.id}`}>
+        {props.term.availableCopies > 0 && <Link className={"btn btn-dark"}
+                                                 onClick={() => props.onBookRent(props.term.id)}
+                                                 to={`/`}>
           Mark as Taken
-        </Link>
+        </Link>}
+        {props.term.availableCopies <= 0 && <span>
+          No more copies
+        </span>}
 
       </td>
     </tr>
